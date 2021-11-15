@@ -1,4 +1,5 @@
 <?php
+    include "./Empleado.php";
     Class EmpleadoPlantilla extends Empleado{
         
         private $sueldo;
@@ -52,10 +53,17 @@
         }
 
         /**
+         * @return Devuelve los ingresos mensuales
+         */
+        public function ingresos(){
+            return $this->sueldo + $this->dietas;
+        }
+
+        /**
          * @return Cadena con información
         */
         Public function mostrar(){
-            return parent::mostrarEmpleado() . ", con sueldo de " . $this->sueldo . "€ y dietas de " . $this->dietas;
+            return parent::mostrarEmpleado() . ", ingresa " . $this->ingresos() . "€. ";
         }
     
     }
