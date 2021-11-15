@@ -75,7 +75,7 @@
 
                 return $this;
         }
-
+        
         /**
          * Devuelve una cadena con la información del empleado
          * @return cadena de información
