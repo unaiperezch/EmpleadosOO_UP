@@ -1,6 +1,5 @@
 <?php
     include "Empleado.php";
-    include "EmpleadoPlantilla.php";
     $resultado = "";
 
     $Emp1 = new Empleado("Unai","Pérez","31-55555555-69");

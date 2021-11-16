@@ -1,5 +1,5 @@
 <?php
-    class Empleado{
+    Abstract class Empleado{
         //Atributos
         private $nombre;
         private $apellidos;
@@ -83,6 +83,11 @@
         Public function mostrarEmpleado(){
             return "Emplead@: " . $this->nombre . " " . $this->apellidos . " con Nº Social " . $this->numeroSeguridadSocial;
         }
+
+        /**
+         * Método abstracto que devuelve los ingresos
+         */
+        Public abstract function ingresos();
     }
 
     Class EmpleadoPlantilla extends Empleado{
@@ -152,4 +157,97 @@
         }
     
     }
-?>
+
+    Class EmpleadoPorComision extends Empleado{
+        private $horas;
+        private $tarifa;
+        private $base;
+        Public function __construct($nombre,$apellido,$numSoc,$horas,$tarifa,$base)
+        {
+                parent::__construct($nombre,$apellido,$numSoc);
+                $this->horas = $horas;
+                $this->tarifa = $tarifa;
+                $this->base = $base;
+        }
+
+        /**
+         * Get the value of horas
+         */ 
+        public function getHoras()
+        {
+                return $this->horas;
+        }
+
+        /**
+         * Set the value of horas
+         *
+         * @return  self
+         */ 
+        public function setHoras($horas)
+        {
+                $this->horas = $horas;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of tarifa
+         */ 
+        public function getTarifa()
+        {
+                return $this->tarifa;
+        }
+
+        /**
+         * Set the value of tarifa
+         *
+         * @return  self
+         */ 
+        public function setTarifa($tarifa)
+        {
+                $this->tarifa = $tarifa;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of base
+         */ 
+        public function getBase()
+        {
+                return $this->base;
+        }
+
+        /**
+         * Set the value of base
+         *
+         * @return  self
+         */ 
+        public function setBase($base)
+        {
+                $this->base = $base;
+
+                return $this;
+        }
+
+        /**
+         * @return Devuelve los ingresos del empleado
+         */
+        Public function ingresos(){
+                return ($this->base+$this->tarifa)*$this->horas;
+        }
+
+        /**
+         * @return Información del empleado
+         */
+        Public function mostrar(){
+                return parent::mostrarEmpleado() . ", ingresa " . $this->ingresos() . "€. ";
+        }
+     }
+
+    Class PruebaPolimorf{
+        private  EmpleadoPlantilla $e;
+        Public static function calcIngresos($e){
+            return $e->getSueldo() + $e->getDietas();
+        }
+    }
