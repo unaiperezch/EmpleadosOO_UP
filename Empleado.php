@@ -1,5 +1,5 @@
 <?php
-    Abstract class Empleado{
+    abstract class Empleado{
         //Atributos
         private $nombre;
         private $apellidos;
@@ -8,7 +8,7 @@
         /**
          * Constructor para la clase empleado
          */
-        Public function __construct($nombre,$apellido,$numSocial)
+        public function __construct($nombre,$apellido,$numSocial)
         {
             $this->nombre = $nombre;
             $this->apellidos = $apellido;
@@ -80,14 +80,14 @@
          * Devuelve una cadena con la información del empleado
          * @return cadena de información
          */
-        Public function mostrarEmpleado(){
+        Public function mostrar(){
             return "Emplead@: " . $this->nombre . " " . $this->apellidos . " con Nº Social " . $this->numeroSeguridadSocial;
         }
 
         /**
          * Método abstracto que devuelve los ingresos
          */
-        Public abstract function ingresos();
+        abstract function ingresos();
     }
 
     Class EmpleadoPlantilla extends Empleado{
@@ -153,7 +153,7 @@
          * @return Cadena con información
         */
         Public function mostrar(){
-            return parent::mostrarEmpleado() . ", ingresa " . $this->ingresos() . "€. ";
+            return parent::mostrar() . ", ingresa " . $this->ingresos() . "€. ";
         }
     
     }
@@ -241,13 +241,55 @@
          * @return Información del empleado
          */
         Public function mostrar(){
-                return parent::mostrarEmpleado() . ", ingresa " . $this->ingresos() . "€. ";
+                return parent::mostrar() . ", ingresa " . $this->ingresos() . "€. ";
         }
      }
 
     Class PruebaPolimorf{
-        private  EmpleadoPlantilla $e;
+            /**
+             * @return Los ingresos del empleado que introduzcas
+             */
         Public static function calcIngresos($e){
-            return $e->getSueldo() + $e->getDietas();
+            return $e->ingresos();
         }
+    }
+
+    Class Empresa{
+            private $empresa ;
+            
+            /**
+             * Constructor de la clase empresa
+             */
+            public function __construct(){
+                    $this->empresa = array();
+            }
+
+            /**
+             * Añade un empleado
+             */
+            public function añadirEmpleado($e){
+                array_push($this->empresa,$e);
+            }
+
+            /**
+             * @return Lista de empleados
+             */
+            public function listarEmpleados(){
+                    $resul = "";
+                    foreach ($this->empresa as $key => $value) {
+                            $resul .= "<p>" . $value->mostrar() . "</p>";
+                    }
+                    return $resul;
+            }
+
+            /**
+             * @return Dinero entre todos
+             */
+            public function ingresosTotales(){
+                $resul = 0;
+                foreach ($this->empresa as $key => $value) {
+                        $resul += $value->ingresos();
+                }
+                return $resul;
+            }
     }
