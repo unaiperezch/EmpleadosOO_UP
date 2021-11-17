@@ -1,5 +1,11 @@
 <?php
     include "Empleado.php";
+    use empresaUnai\Empleado as Empleado;
+    use empresaUnai\EmpleadoPlantilla as EmpleadoPlantilla;
+    use empresaUnai\EmpleadoPorComision as EmpleadoPorComision;
+    use empresaUnai\PruebaPolimorf as PruebaPolimorf;
+    use empresaUnai\Empresa as Empresa;
+    
     $resultado = "";
     $resultado.= "<h2>Empleado</h2><br>";
     /*$Emp1 = new Empleado("Unai","Pérez","31-55555555-69");
